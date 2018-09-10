@@ -14,7 +14,7 @@ pdf.dat <- extract_tables(pdf.file)                                             
 pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
 names(pdf.tbl) <- pdf.dat[[1]][1, ]
 names(pdf.tbl)[1]<-"Description"
-pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))
+pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))                                       # https://tinyurl.com/ya4ok9tb
 pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
 head(pdf.tbl)                                                                   # Display first 5 rows of data
 
