@@ -13,8 +13,16 @@ pdf.dat <- extract_tables(pdf.file)                                             
 # pdf.tbl <- data.frame(pdf.dat[[1]][-1, ])
 pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
 names(pdf.tbl) <- pdf.dat[[1]][1, ]
+names(pdf.tbl)[1]<-"Description"
+pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))
 pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
 head(pdf.tbl)                                                                   # Display first 5 rows of data
+
+grad_res<-pdf.tbl[2:5, c(1, 11)]
+grad_non_res<-pdf.tbl[8:11, c(1, 11)]
+
+# setnames(grad_res, "2016-17", "1617")
+# setnames(grad_non_res, "2016-17", "1617")
 
 
 ##    mpg  cyl disp  hp  drat wt    qsec  vs am gear carb

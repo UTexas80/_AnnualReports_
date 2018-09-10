@@ -23,12 +23,11 @@ summary(cars)
 
 You can also embed plots, for example:
 
-```{r grad coa, echo=FALSE}
+```{r echo=FALSE, message=FALSE, warning=FALSE}
 # Load Tabula functions
 library(data.table)
 library(tabulizer)
 library(tabulizerjars)
-
 
 pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"          # Define path to PDF file
 pdf.dat <- extract_tables(pdf.file)                                             # Extract data table
@@ -36,7 +35,29 @@ pdf.dat <- extract_tables(pdf.file)                                             
 # pdf.tbl <- data.frame(pdf.dat[[1]][-1, ])
 pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
 names(pdf.tbl) <- pdf.dat[[1]][1, ]
-pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
+names(pdf.tbl)[1]<-"Description"
+
+grad_res<-pdf.tbl[2:5, c(1, 11)]
+grad_non_res<-pdf.tbl[8:11, c(1, 11)]
+# pie(table(pdf.tbl[2:5,11]))                                                   # create pie chart
+
+p <- plot_ly(grad_res, labels = ~ Description, values = ~ 2016-17, type = 'pie', 
+             textposition = 'inside', 
+             textinfo = 'label+percent', 
+             insidetextfont = list(color = '#FFFFFF'), 
+             hoverinfo = 'text', 
+             text = ~paste(Description, 2016-17),
+             marker = list(colors = colors,                                                                
+             line = list(color = '#FFFFFF', width = 1)),
+             showlegend = T)  %>%
+             layout(title = 'Figure C.1.1',
+             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+
+
+
+
 ```
 
 Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
