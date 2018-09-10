@@ -31,7 +31,7 @@ p <- plot_ly(grad_res, labels = ~Description, values = ~ay1617, type = 'pie',
                       line = list(color = '#FFFFFF', width = 1)),
                       #The 'pull' attribute can also be used to create space between the sectors
         showlegend = FALSE) %>%
-  layout(title = 'Resident Graduate COA ',
+  layout(title = str_c(currentAY, '-Resident Graduate COA'),
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
 
