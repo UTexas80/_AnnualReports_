@@ -44,7 +44,10 @@ colnames(grad_res)[2] <- paste("ay", colnames(grad_res[,c(2)]), sep = "")
 aes_string(y=names(grad_res)[2])
 
 
-
+```{r heading,echo=FALSE, results='asis'}
+<!-- cat("#", params$currentYr)-->
+<!-- pandoc.header(params$currentYr) -->
+```
 
 # setnames(grad_res, "2016-17", "1617")
 # setnames(grad_non_res, "2016-17", "1617")
