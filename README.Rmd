@@ -1,0 +1,106 @@
+---
+title: "AnnualReports"
+author: "Glen C. Falk"
+date: "September 10, 2018"
+output:
+  pdf_document: default
+  html_document: default
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+## R Markdown
+
+This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+
+When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
+
+```{r grads}
+View(pdf.tbl)
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+# Load Tabula functions
+library(data.table)
+library(tabulizer)
+library(tabulizerjars)
+
+pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"          # Define path to PDF file
+pdf.dat <- extract_tables(pdf.file)                                             # Extract data table
+# Coerce output matrix to data.frame
+# pdf.tbl <- data.frame(pdf.dat[[1]][-1, ])
+pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
+names(pdf.tbl) <- pdf.dat[[1]][1, ]
+names(pdf.tbl)[1]<-"Description"
+
+grad_res<-pdf.tbl[2:5, c(1, 11)]
+grad_non_res<-pdf.tbl[8:11, c(1, 11)]
+# pie(table(pdf.tbl[2:5,11]))                                                   # create pie chart
+
+p <- plot_ly(grad_res, labels = ~ Description, values = ~ 2016-17, type = 'pie', 
+             textposition = 'inside', 
+             textinfo = 'label+percent', 
+             insidetextfont = list(color = '#FFFFFF'), 
+             hoverinfo = 'text', 
+             text = ~paste(Description, 2016-17),
+             marker = list(colors = colors,                                                                
+             line = list(color = '#FFFFFF', width = 1)),
+             showlegend = T)  %>%
+             layout(title = 'Figure C.1.1',
+             xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+             yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+
+
+
+
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+
+# AnnualReports
+
+Welcome to ProjectTemplate!
+
+This file introduces you to ProjectTemplate, but you should eventually replace
+the contents of this file with an introduction to your project. People who
+work with your data in the future will thank you for it, including your future
+self.
+
+ProjectTemplate is an R package that helps you organize your statistical
+analysis projects. Since you're reading this file, we'll assume that you've
+already called `create.project()` to set up this project and all of its
+contents.
+
+To load your new project, you'll first need to `setwd()` into the directory
+where this README file is located. Then you need to run the following two
+lines of R code:
+
+	library('ProjectTemplate')
+	load.project()
+
+After you enter the second line of code, you'll see a series of automated
+messages as ProjectTemplate goes about doing its work. This work involves:
+* Reading in the global configuration file contained in `config`.
+* Loading any R packages you listed in he configuration file.
+* Reading in any datasets stored in `data` or `cache`.
+* Preprocessing your data using the files in the `munge` directory.
+
+Once that's done, you can execute any code you'd like. For every analysis
+you create, we'd recommend putting a separate file in the `src` directory.
+If the files start with the two lines mentioned above:
+
+	library('ProjectTemplate')
+	load.project()
+
+You'll have access to all of your data, already fully preprocessed, and
+all of the libraries you want to use.
+
+For more details about ProjectTemplate, see http://projecttemplate.net
+

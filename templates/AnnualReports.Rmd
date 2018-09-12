@@ -1,0 +1,33 @@
+---
+title: "Untitled"
+output: word_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Make a table
+Create a subset of the mtcars data. 
+
+```{r}
+library(data.table)
+library(tabulizer)
+library(tabulizerjars)
+
+pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"          # Define path to PDF file
+pdf.dat <- extract_tables(pdf.file)                                             # Extract data table
+# Coerce output matrix to data.frame
+# pdf.tbl <- data.frame(pdf.dat[[1]][-1, ])
+pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
+names(pdf.tbl) <- pdf.dat[[1]][1, ]
+names(pdf.tbl)[1]<-"Description"
+pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))
+pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
+                                                      
+library(knitr)
+kable(pdf.tbl)
+```
+
+
+

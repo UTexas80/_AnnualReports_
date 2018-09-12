@@ -1,0 +1,81 @@
+---
+title: "`r params$set_title`"
+params:
+  currentYr: !r as.numeric(format(Sys.Date(), format="%y"))
+  lastYr: !r as.numeric(format(Sys.Date(), format="%y"))-1
+  set_title: My Title!
+output:
+  word_document: default
+  pdf_document: default
+  html_document:
+    df_print: paged
+---
+<!-- Initializing knitr -->
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r table,echo=FALSE}
+library(data.table)
+library(tabulizer)
+library(tabulizerjars)
+
+pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"
+pdf.dat <- extract_tables(pdf.file)
+pdf.tbl <- data.table(pdf.dat[[1]][-1, ])
+names(pdf.tbl) <- pdf.dat[[1]][1, ]
+names(pdf.tbl)[1]<-"Description"
+pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))
+
+
+library(DT)
+print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
+library(knitr)
+pdf.tbl[is.na(pdf.tbl)] <- ""
+kable(pdf.tbl)
+```
+
+
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(tabulizer)
+library(tabulizerjars)
+
+pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"          # Define path to PDF file
+pdf.dat <- extract_tables(pdf.file)                                             # Extract data table
+pdf.tbl <- data.table(pdf.dat[[1]][-1, ])                                       # Coerce output matrix to data.table
+names(pdf.tbl) <- pdf.dat[[1]][1, ]
+names(pdf.tbl)[1]<-"Description"
+pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))             
+
+grad_res<-pdf.tbl[2:5, c(1, 11)]
+grad_non_res<-pdf.tbl[8:11, c(1, 11)]
+
+colnames(grad_res)[2] <- "ay1617"
+colnames(grad_non_res)[2] <- "ay1617"
+
+colors <- c('rgb(211,94,96)', 'rgb(128,133,133)', 'rgb(144,103,167)', 'rgb(171,104,87)', 'rgb(114,147,203)')
+
+c_pie_grad_res <- plot_ly(grad_res, labels = ~Description, values = ~ay1617, type = 'pie',
+        textposition = 'inside',
+        textinfo = 'label+percent',
+        insidetextfont = list(color = '#FFFFFF'),
+        hoverinfo = 'text',
+        text = ~paste('$', ay1617, ' dollars'),
+        marker = list(colors = colors,
+                      line = list(color = '#FFFFFF', width = 1)),
+                      #The 'pull' attribute can also be used to create space between the sectors
+        showlegend = FALSE) %>%
+  layout(title = str_c(currentAY, '-Resident Graduate COA'),
+         xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
+         yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+print(c_pie_grad_res)
+
+```

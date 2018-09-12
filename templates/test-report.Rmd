@@ -1,0 +1,14 @@
+---
+title: "Test Report"
+author: "Your Name"
+date: "July 3, 2015"
+output:
+  word_document:
+    reference_docx: word-styles-reference-01.docx
+---
+
+# Heading 1
+My report starts here.
+
+## Heading 2
+And I have this next subsection.
