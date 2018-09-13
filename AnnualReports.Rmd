@@ -1,13 +1,13 @@
 ---
-title: "`r params$set_title`"
+title: "`r params$current_yr`"
 params:
-  currentYr: !r as.numeric(format(Sys.Date(), format="%y"))
+  current_yr: !r as.numeric(format(Sys.Date(), format="%y"))
   lastYr: !r as.numeric(format(Sys.Date(), format="%y"))-1
   set_title: My Title!
 output: word_document
 ---
-<!-- Initializing knitr -->
 
+<!-- Initializing knitr -->
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
 ```
@@ -38,9 +38,14 @@ You can also embed plots, for example:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
 library(plotly)
+library(processx)
 library(stringr)
 library(tabulizer)
 library(tabulizerjars)
+library(webshot)
+
+is_word <- try (("word_document" %in% rmarkdown::all_output_formats(knitr::current_input())), silent=TRUE)
+is_word <- (is_word == TRUE)
 
 pdf.file <- "~/AnnualReports/data/02UndergraduateCostOfAttendance.pdf"          # Define path to PDF file
 pdf.dat <- extract_tables(pdf.file)                                             # Extract data table
@@ -75,7 +80,9 @@ c_pie_grad_res <- plot_ly(grad_res, labels = ~Description, values = ~ay1617, typ
   layout(title = str_c(currentAY, '-Resident Graduate COA'),
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
-
+         
+if (is_word) { orca(c_pie_grad_res) } else {c_pie_grad_res}
 print(c_pie_grad_res)
+
 
 ```
