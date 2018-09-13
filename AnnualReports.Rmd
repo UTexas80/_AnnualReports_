@@ -80,6 +80,8 @@ c_pie_grad_res <- plot_ly(grad_res, labels = ~Description, values = ~ay1617, typ
   layout(title = str_c(currentAY, '-Resident Graduate COA'),
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+include_graphics()
+
          
 if (is_word) { orca(c_pie_grad_res) } else {c_pie_grad_res}
 print(c_pie_grad_res)
