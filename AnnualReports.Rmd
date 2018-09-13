@@ -4,11 +4,7 @@ params:
   currentYr: !r as.numeric(format(Sys.Date(), format="%y"))
   lastYr: !r as.numeric(format(Sys.Date(), format="%y"))-1
   set_title: My Title!
-output:
-  word_document: default
-  pdf_document: default
-  html_document:
-    df_print: paged
+output: word_document
 ---
 <!-- Initializing knitr -->
 
@@ -36,14 +32,13 @@ library(knitr)
 pdf.tbl[is.na(pdf.tbl)] <- ""
 kable(pdf.tbl)
 ```
-
-
-
 ## Including Plots
 
 You can also embed plots, for example:
 
 ```{r echo=FALSE, message=FALSE, warning=FALSE}
+library(plotly)
+library(stringr)
 library(tabulizer)
 library(tabulizerjars)
 
@@ -59,6 +54,11 @@ grad_non_res<-pdf.tbl[8:11, c(1, 11)]
 
 colnames(grad_res)[2] <- "ay1617"
 colnames(grad_non_res)[2] <- "ay1617"
+
+currentYr <- as.numeric(format(Sys.Date(), format="%y"))
+lastYr <- currentYr - 1
+currentAY <- as.numeric(paste(lastYr, currentYr, sep = ""))
+ay<-as.data.table(seq(as.numeric(currentAY), as.numeric(currentAY)+(101*(100-currentYr-1)),by=101))
 
 colors <- c('rgb(211,94,96)', 'rgb(128,133,133)', 'rgb(144,103,167)', 'rgb(171,104,87)', 'rgb(114,147,203)')
 
