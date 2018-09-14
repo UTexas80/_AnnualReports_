@@ -18,6 +18,7 @@ pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a
 pdf.tbl[is.na(pdf.tbl)] <- ""
 
 print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+kable(pdf.dat)
 
 pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
 head(pdf.tbl)                                                                   # Display first 5 rows of data

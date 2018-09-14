@@ -7,7 +7,7 @@ data_loading_header: TRUE
 data_ignore:
 data_tables: TRUE
 load_libraries: TRUE
-libraries: datacheckr, data.table, devtools, dplyr, DT, gridExtra, knitr, lubridate, openxlsx, plyr, plotly, processx, readxl, reshape2, rmarkdown, rvest, scales, stringr, tabulizer, tabulizerjars, tidyverse, webshot, xlsx
+libraries: datacheckr, data.table, devtools, dplyr, DT, gridExtra, htmltools, knitr, lubridate, openxlsx, plyr, plotly, processx, readxl, reshape2, rmarkdown, rvest, scales, stringr, tabulizer, tabulizerjars, tidyverse, webshot, xlsx
 logging: TRUE
 logging_level: INFO
 munging: TRUE
