@@ -28,3 +28,6 @@ c_pie_grad_non<- plot_ly(grad_non_res, labels = ~Description, values = ~ay1617, 
   layout(title = str_c(currentAY, '-Non-Resident Graduate COA'),
          xaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE),
          yaxis = list(showgrid = FALSE, zeroline = FALSE, showticklabels = FALSE))
+
+print(c_pie_grad_res)
+print(c_pie_grad_non)
