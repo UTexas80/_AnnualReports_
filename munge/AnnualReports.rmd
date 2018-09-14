@@ -1,7 +1,10 @@
 ---
 output:
   word_document: default
+    always_allow_html: yes
+  html_document: default
 ---
+
 # Initialise Project
 ```{r adjust_directory_if_needed}
 # Uncomment lines below if rmd file is placed in a subdirectory

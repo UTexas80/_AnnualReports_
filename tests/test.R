@@ -43,6 +43,9 @@ colnames(grad_res)[2] <- paste("ay", colnames(grad_res[,c(2)]), sep = "")
 
 aes_string(y=names(grad_res)[2])
 
+pdf.tbl[, c(2:6, 8:12)] <-lapply(pdf.tbl[, c(2:6, 8:12)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))
+
+
 
 ```{r heading,echo=FALSE, results='asis'}
 <!-- cat("#", params$currentYr)-->
