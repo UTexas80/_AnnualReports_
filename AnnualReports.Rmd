@@ -21,7 +21,8 @@ output:
 ```             
 
 # Explore
-```{r, chart-grad, fig.hold='hold', out.width=2}
+```{r, chart-grad, fig.hold='hold', out.width=50%}
+library(knitr)
 kable(pdf.dat)
 p_grad_res<-plot_ly(grad_res, x = ~Description, y = ~ay1617)
 plotly_data(p_grad_res)

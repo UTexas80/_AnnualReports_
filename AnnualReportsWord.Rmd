@@ -1,30 +1,41 @@
 ---
-title: "WordTest"
+title: "Annual Reports"
 author: "Glen C. Falk"
 date: "September 17, 2018"
-output: word_document
+output:
+  word_document: default
 ---
 
 ```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_chunk$set(echo = FALSE)
+```
+# Initialise Project
+```{r adjust_directory_if_needed}
+# Uncomment lines below if rmd file is placed in a subdirectory
+# library(knitr)
+# opts_knit$set(root.dir = normalizePath('../')) 
 ```
 
-## R Markdown
+```{r load_project}
+# 1. Set options in config/global.dcf
+# 2. Load packages listed in config/global.dcf
+# 3. Import functions and coe in lib directory
+# 4. Load data in data directory
+# 5. Run data manipulations in munge directory 
 
-This is an R Markdown document. Markdown is a simple formatting syntax for authoring HTML, PDF, and MS Word documents. For more details on using R Markdown see <http://rmarkdown.rstudio.com>.
+# rm(list = ls()) # optionally refresh workspace
+# library(ProjectTemplate); load.project()
+```             
 
-When you click the **Knit** button a document will be generated that includes both content as well as the output of any embedded R code chunks within the document. You can embed an R code chunk like this:
-
-```{r cars}
-summary(cars)
-```
-
-## Including Plots
-
-You can also embed plots, for example:
-
-```{r pressure, echo=FALSE}
-plot(pressure)
-```
-
-Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
+# Explore
+```{r, table-grad}
+pander(pdf.dat)
+stargazer(pdf.dat, type = 'text')
+library(knitr)
+knitr::kable(
+  mtcars[1:5, ], 
+  caption = "A knitr kable."
+)
+kable(pdf.dat, caption = 'Annual Reports')
+print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+``` 

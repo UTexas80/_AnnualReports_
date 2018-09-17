@@ -75,6 +75,7 @@ pdf.tbl[, c(2:6, 8:12)] <-lapply(pdf.tbl[, c(2:6, 8:12)], function(y) as.numeric
 # names(t)<-as.character(t[1,])
 # t<-t[-1,]
 
+<<<<<<< HEAD
 
 # set pander table-layout options
 library(pander)
@@ -83,3 +84,15 @@ panderOptions('table.alignment.default', function(df)
 panderOptions('table.split.table', Inf)
 panderOptions('big.mark', ",")
 panderOptions('keep.trailing.zeros', TRUE)
+=======
+# fig.hold='hold', out.width=5
+#kable(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
+#kable(datatable(pdf.tbl) %>%
+# kable_styling(bootstrap_options = "striped", full_width = F) %>%
+#   formatCurrency(2:11, digits = 0))
+# kable(pdf.dat, caption = 'Annual Reports')
+# print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+#  kable_styling(bootstrap_options = "striped", full_width = F)
+#print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+>>>>>>> 0681c5c33cf1a1ddeb6977092eb9b05824215272
