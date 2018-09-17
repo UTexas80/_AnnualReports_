@@ -74,3 +74,14 @@ pdf.tbl[, c(2:6, 8:12)] <-lapply(pdf.tbl[, c(2:6, 8:12)], function(y) as.numeric
 # t<-data.table(pdf.dat[[1]])
 # names(t)<-as.character(t[1,])
 # t<-t[-1,]
+
+# fig.hold='hold', out.width=5
+#kable(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
+#kable(datatable(pdf.tbl) %>%
+# kable_styling(bootstrap_options = "striped", full_width = F) %>%
+#   formatCurrency(2:11, digits = 0))
+# kable(pdf.dat, caption = 'Annual Reports')
+# print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+#  kable_styling(bootstrap_options = "striped", full_width = F)
+#print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
