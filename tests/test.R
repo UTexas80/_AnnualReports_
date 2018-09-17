@@ -74,3 +74,12 @@ pdf.tbl[, c(2:6, 8:12)] <-lapply(pdf.tbl[, c(2:6, 8:12)], function(y) as.numeric
 # t<-data.table(pdf.dat[[1]])
 # names(t)<-as.character(t[1,])
 # t<-t[-1,]
+
+
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
