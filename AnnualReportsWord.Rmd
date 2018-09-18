@@ -27,15 +27,14 @@ knitr::opts_chunk$set(echo = FALSE)
 # library(ProjectTemplate); load.project()
 ```             
 
-# Explore
+# Table
 ```{r, table-grad}
-pander(pdf.dat)
-stargazer(pdf.dat, type = 'text')
-library(knitr)
-knitr::kable(
-  mtcars[1:5, ], 
-  caption = "A knitr kable."
-)
-kable(pdf.dat, caption = 'Annual Reports')
-print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+library(pander)
+pander(pdf.tbl)
 ``` 
+# Charts
+```{r, chart-grad}       
+orca(c_pie_grad_res, "Graduate-Resident.png")
+orca(c_pie_grad_non, "Graduate-NonResident.png")
+browsable(tagList(c_pie_grad_res, c_pie_grad_non))
+```
