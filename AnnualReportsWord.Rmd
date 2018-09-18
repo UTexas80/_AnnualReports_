@@ -34,7 +34,7 @@ pander(pdf.tbl)
 ``` 
 # Charts
 ```{r, chart-grad}       
-orca(c_pie_grad_res, "Graduate-Resident.png")
-orca(c_pie_grad_non, "Graduate-NonResident.png")
-browsable(tagList(c_pie_grad_res, c_pie_grad_non))
+# orca(c_pie_grad_res, "Graduate-Resident.png")
+# orca(c_pie_grad_non, "Graduate-NonResident.png")
+# browsable(tagList(c_pie_grad_res, c_pie_grad_non))
 ```

@@ -1,7 +1,7 @@
 ---
 output:
+  reference_docx: word-styles-reference-01.docx
   word_document: default
-    always_allow_html: yes
   html_document: default
 ---
 
@@ -24,11 +24,11 @@ output:
 ```             
 
 # Explore
-```{r}
-kable(pdf.dat)
-p_grad_res<-plot_ly(grad_res, x = ~Description, y = ~ay1617)
-plotly_data(p_grad_res)
-browsable(tagList(c_pie_grad_res, c_pie_grad_non))
-```
+# ```{r}
+# kable(pdf.dat)
+# p_grad_res<-plot_ly(grad_res, x = ~Description, y = ~ay1617)
+# plotly_data(p_grad_res)
+# browsable(tagList(c_pie_grad_res, c_pie_grad_non))
+# ```
 
 

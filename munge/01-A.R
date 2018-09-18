@@ -17,7 +17,11 @@ names(pdf.tbl)[1]<-"Description"
 pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))                                       # https://tinyurl.com/ya4ok9tb
 pdf.tbl[is.na(pdf.tbl)] <- ""
 
+pdf.tbl1<-pdf.tbl[, c(2:11)] <-lapply(pdf.tbl[, c(2:11)], function(y) as.numeric(gsub('[^a-zA-Z0-9.]', '', y)))  
+# pdf.tbl1<-pdf.tbl1[is.na(pdf.tbl1)] <- "" 
+
 print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
 kable(pdf.dat)
 
 pie(table(pdf.tbl[2:5,11]))                                                     # create pie chart
