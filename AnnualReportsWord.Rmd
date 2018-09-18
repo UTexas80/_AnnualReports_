@@ -1,7 +1,14 @@
 ---
+title: "Annual Reports"
+author: "Glen C. Falk"
+date: "September 17, 2018"
 output:
   word_document: default
 ---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = FALSE)
+```
 # Initialise Project
 ```{r adjust_directory_if_needed}
 # Uncomment lines below if rmd file is placed in a subdirectory
@@ -20,13 +27,14 @@ output:
 # library(ProjectTemplate); load.project()
 ```             
 
-# Explore
-```{r, chart-grad, fig.hold='hold', out.width=50%}
-library(knitr)
-kable(pdf.dat)
-p_grad_res<-plot_ly(grad_res, x = ~Description, y = ~ay1617)
-plotly_data(p_grad_res)
+# Table
+```{r, table-grad}
+library(pander)
+pander(pdf.tbl)
+``` 
+# Charts
+```{r, chart-grad}       
+orca(c_pie_grad_res, "Graduate-Resident.png")
+orca(c_pie_grad_non, "Graduate-NonResident.png")
 browsable(tagList(c_pie_grad_res, c_pie_grad_non))
 ```
-
-

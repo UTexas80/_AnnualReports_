@@ -74,3 +74,46 @@ pdf.tbl[, c(2:6, 8:12)] <-lapply(pdf.tbl[, c(2:6, 8:12)], function(y) as.numeric
 # t<-data.table(pdf.dat[[1]])
 # names(t)<-as.character(t[1,])
 # t<-t[-1,]
+
+<<<<<<< HEAD
+
+# set pander table-layout options
+library(pander)
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+panderOptions('table.split.table', Inf)
+panderOptions('big.mark', ",")
+panderOptions('keep.trailing.zeros', TRUE)
+=======
+# fig.hold='hold', out.width=5
+#kable(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
+#kable(datatable(pdf.tbl) %>%
+# kable_styling(bootstrap_options = "striped", full_width = F) %>%
+#   formatCurrency(2:11, digits = 0))
+# kable(pdf.dat, caption = 'Annual Reports')
+# print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+#  kable_styling(bootstrap_options = "striped", full_width = F)
+#print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+>>>>>>> 0681c5c33cf1a1ddeb6977092eb9b05824215272
+
+panderOptions('table.alignment.default', function(df)
+    ifelse(sapply(df, is.numeric), 'right', 'left'))
+
+
+
+stargazer(pdf.dat, type = 'text')
+
+library(knitr)
+knitr::kable(
+  mtcars[1:5, ], 
+  caption = "A knitr kable."
+)
+kable(pdf.dat, caption = 'Annual Reports')
+print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
+
+
+
+
+plotly_data(p_grad_res)
+browsable(tagList(c_pie_grad_res, c_pie_grad_non))
