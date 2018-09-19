@@ -58,7 +58,8 @@ p <- plot_ly(grad_res, labels = ~ Description, values = ~ 2016-17, type = 'pie',
 
 
 
-
+is_pdf <- try (("pdf_document" %in% rmarkdown::all_output_formats(knitr::current_input())), silent=TRUE)
+is_pdf <- (is_pdf == TRUE)
 
 ```
 
