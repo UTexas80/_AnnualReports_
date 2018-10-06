@@ -111,15 +111,9 @@ knitr::kable(
 )
 kable(pdf.dat, caption = 'Annual Reports')
 print(datatable(pdf.tbl) %>% formatCurrency(2:11, digits = 0))
-plotly_data(p_grad_res)
-browsable(tagList(c_pie_grad_res, c_pie_grad_non))
 
 
-# Explore
-```{r, chart-grad, fig.hold='hold', out.width=50%}
-library(knitr)
-kable(pdf.dat)
+
 p_grad_res<-plot_ly(grad_res, x = ~Description, y = ~ay1617)
 plotly_data(p_grad_res)
 browsable(tagList(c_pie_grad_res, c_pie_grad_non))
-```
